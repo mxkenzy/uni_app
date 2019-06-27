@@ -10,3 +10,11 @@ body {
 main {
 	flex: 1 0 auto;
 }
+
+nav {
+	@extend .green, .lighten-1
+}
+
+footer {
+	@extend .green, .lighten-1
+}
