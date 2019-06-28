@@ -18,3 +18,7 @@ nav {
 footer {
 	@extend .green, .lighten-1
 }
+
+.card {
+	min-height: 190px;	
+}
