@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController
-before_action :set_student, only: [:edit, :update, :show]
+  before_action :set_student, only: [:edit, :update, :show]
+  skip_before_action :require_user, only: [:new, :create]
+  before_action :require_same_user, only: [:edit, :update]
 
   def index
   	@students = Student.all
@@ -41,7 +43,14 @@ before_action :set_student, only: [:edit, :update, :show]
   end
 
   def set_student
-	@student = Student.find(params[:id])
+	  @student = Student.find(params[:id])
+  end
+
+  def require_same_user
+    if current_user != @student
+      flash[:notice] = "You can only change your info"
+      redirect_to student_path(current_user)
+    end
   end
 
 end
