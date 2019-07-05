@@ -3,7 +3,17 @@
     <div class="card-content white-text">
       <span class="card-title"><%= @student.name %></span>
       <p>Email: <%= @student.email %></p>
-      <p>Course enrollments: None</p>
+      <p>Course enrollments: 
+        <% if @student.courses.empty? %>
+          None
+          <% else %>
+            <ul>
+              <% @student.courses.each do |course| %>
+                <li><%= link_to "#{course.name}", course_path(course), class: "white-text" %></li>
+              <% end %>
+            </ul>
+          <% end %>  
+          </p>
     </div>
     <% if current_user == @student %>
       <div class="card-action">
